@@ -1,9 +1,8 @@
 import fs from "fs";
-import { encode } from "./qoi";
-
+import { encodeQoi } from "./qoi-encode";
 const decodeImage = require("image-decode");
 
-const encodeQoi = (filename: string) => {
+const encodeQoiFile = (filename: string) => {
   const writeFilename = filename.replace(/\.[a-z]+$/, ".qoi");
   if (filename === writeFilename) {
     return;
@@ -22,10 +21,10 @@ const encodeQoi = (filename: string) => {
     return Uint32Array.from(newArr);
   };
 
-  const buf = encode(createUint32Array(data), width, height, 4);
+  const buf = encodeQoi(createUint32Array(data), width, height, 4);
 
   fs.writeFileSync(writeFilename, buf, { encoding: "binary" });
   console.log(writeFilename, width, height);
 };
 
-encodeQoi("erukiti.png");
+encodeQoiFile("erukiti.png");

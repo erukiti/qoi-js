@@ -1,1 +1,4 @@
 node_modules/
+yarm*.log
+/*.png
+/*.qoi
